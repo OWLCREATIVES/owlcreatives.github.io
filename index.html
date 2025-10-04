@@ -100,8 +100,8 @@
             left: 0;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
-            /* FIX 1: Ensures the image covers the entire slide area */
-            object-fit: cover; 
+            /* FIX: Ensures the whole image is visible, not cropped */
+            object-fit: contain; 
             filter: none;
         }
 
@@ -110,7 +110,7 @@
         }
         /* --- END SLIDER STYLES --- */
 
-        /* Services Section (Restored lineart.png background here) */
+        /* Services Section (Restored lineart.png background) */
         #services {
             padding: 80px 0 40px;
             background: url('lineart.png') no-repeat center center/cover, 
@@ -334,8 +334,9 @@
             // --- 1. SLIDER SETUP (Top of Page) ---
 
             const sliderContainer = document.getElementById('hero-slider');
-            // Path is set to 'OTHER/' because your images are stored there
+            // Path is set to 'OTHER/' based on your repository structure
             const sliderPath = 'OTHER/';
+            // Order is set exactly as requested: Artboard 1.png, then copy 3, 4, 5, copy, copy 2
             const sliderImages = [
                 'Artboard 1.png',
                 'Artboard 1 copy 3.jpg',
@@ -348,7 +349,6 @@
             // Dynamically add slides to the HTML
             sliderImages.forEach((fileName, index) => {
                 const img = document.createElement('img');
-                // FIX 2: Correctly pointing to the 'OTHER/' folder
                 img.src = sliderPath + fileName; 
                 img.alt = `Design Slide ${index + 1}`;
                 img.classList.add('slide-image');
@@ -369,7 +369,6 @@
             }
 
             // Start the slideshow (changes every 4 seconds)
-            // Only start if there are slides
             if (slides.length > 1) {
                 setInterval(showNextSlide, 4000); 
             }
