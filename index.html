@@ -82,7 +82,7 @@
             text-decoration: none;
         }
 
-        /* --- SLIDER STYLES FIX --- */
+        /* --- SLIDER STYLES --- */
         #hero-slider {
             position: relative;
             width: 100%;
@@ -100,7 +100,7 @@
             left: 0;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
-            /* FIX: Ensures the whole image is visible, not cropped */
+            /* FIX: Ensures the whole image is visible (no cropping) */
             object-fit: contain; 
             filter: none;
         }
@@ -110,7 +110,7 @@
         }
         /* --- END SLIDER STYLES --- */
 
-        /* Services Section (Restored lineart.png background) */
+        /* Services Section (Includes lineart.png background) */
         #services {
             padding: 80px 0 40px;
             background: url('lineart.png') no-repeat center center/cover, 
@@ -336,14 +336,15 @@
             const sliderContainer = document.getElementById('hero-slider');
             // Path is set to 'OTHER/' based on your repository structure
             const sliderPath = 'OTHER/';
-            // Order is set exactly as requested: Artboard 1.png, then copy 3, 4, 5, copy, copy 2
+            
+            // CORRECTED SLIDER ORDER
             const sliderImages = [
                 'Artboard 1.png',
+                'Artboard 1 copy.jpg',
+                'Artboard 1 copy 2.jpg',
                 'Artboard 1 copy 3.jpg',
                 'Artboard 1 copy 4.jpg',
-                'Artboard 1 copy 5.jpg',
-                'Artboard 1 copy.jpg',
-                'Artboard 1 copy 2.jpg'
+                'Artboard 1 copy 5.jpg'
             ];
             
             // Dynamically add slides to the HTML
