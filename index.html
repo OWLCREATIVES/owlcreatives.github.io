@@ -8,7 +8,7 @@
     <style>
         /* CSS for the Website */
         :root {
-            --primary-color: #6a0595; /* Deep Purple */
+            --primary-color: #6a0595; /* Deep Purple from Flyer */
             --secondary-color: #9d33c5; /* Brighter Purple/Pink from Flyer */
             --text-light: #ffffff;
             --text-dark: #333333;
@@ -71,6 +71,8 @@
             background-color: var(--background-dark);
             padding: 15px 0;
             border-bottom: 3px solid var(--secondary-color);
+            position: relative;
+            z-index: 10;
         }
 
         .logo {
@@ -80,54 +82,36 @@
             text-decoration: none;
         }
 
-        /* Hero Section - Matching Flyer Style */
-        #hero {
+        /* --- SLIDER STYLES --- */
+        #hero-slider {
             position: relative;
-            padding: 120px 0;
-            min-height: 600px;
-            background: url('YOUR_LINE_ART_BACKGROUND_URL.png') no-repeat center center/cover, /* Placeholder for your Line Art BG */
-                      var(--background-dark);
-            background-blend-mode: multiply;
-            text-align: center;
-            /* Gradient for the bottom fade like the flyer */
-            box-shadow: inset 0 -50px 50px -50px var(--background-dark),
-                        inset 0 50px 50px -50px var(--background-dark);
-        }
-        
-        /* Replace with your logo/icon - or use the text version */
-        .owl-logo-placeholder {
-            width: 80px; 
-            height: 80px; 
-            margin: 0 auto 15px;
-            background: url('YOUR_OWL_LOGO_URL.png') no-repeat center center/contain; /* Placeholder for Owl Logo */
+            width: 100%;
+            height: 450px; /* Optimal for landscape posts */
+            overflow: hidden;
+            background-color: #000;
+            border-bottom: 5px solid var(--primary-color);
         }
 
-
-        #hero h1 {
-            font-size: 4em;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            background: linear-gradient(45deg, #f054ff, var(--secondary-color), var(--primary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.1em;
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            object-fit: cover;
+            filter: brightness(0.7); 
         }
 
-        #hero p.tagline {
-            font-size: 1.5em;
-            font-weight: 300;
-            color: var(--text-light);
-            letter-spacing: 3px;
-            padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: inline-block;
-            margin-top: 5px;
+        .slide-image.active {
+            opacity: 1;
         }
+        /* --- END SLIDER STYLES --- */
 
         /* Services Section */
         #services {
-            padding: 80px 0;
+            padding: 80px 0 40px;
         }
 
         .service-list {
@@ -161,7 +145,7 @@
 
         /* Portfolio Section - Focused on PC Shops */
         #portfolio {
-            padding: 80px 0;
+            padding: 40px 0 80px;
             background-color: #111;
         }
 
@@ -193,6 +177,7 @@
             object-fit: cover;
             display: block;
             transition: transform 0.5s ease;
+            min-height: 200px; /* Ensures a minimum height for placeholder */
         }
 
         .gallery-item:hover img {
@@ -226,12 +211,6 @@
             font-size: 1.2em;
             text-transform: uppercase;
         }
-
-        /* Other Designs Section */
-        #other-designs {
-            padding: 50px 0;
-            text-align: center;
-        }
         
         /* Contact Section - Matching Flyer Footer */
         #contact {
@@ -239,7 +218,6 @@
             color: var(--text-light);
             padding: 40px 0;
             text-align: center;
-            margin-top: 50px;
         }
 
         #contact h2 {
@@ -267,11 +245,8 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            #hero h1 {
-                font-size: 3em;
-            }
-            #hero p.tagline {
-                font-size: 1.2em;
+            #hero-slider {
+                height: 300px;
             }
             .service-item {
                 width: 100%;
@@ -292,19 +267,12 @@
         </div>
     </header>
 
-    <section id="hero">
-        <div class="container">
-            <div class="owl-logo-placeholder"></div> 
-            <h1>GRAPHIC</h1>
-            <p class="tagline">DESIGN</p>
-            <p>Specializing in compelling visuals for the tech and gaming industry.</p>
-            <a href="#contact" class="btn btn-primary">GRAB YOUR DESIGN</a>
-        </div>
-    </section>
-
+    <section id="hero-slider">
+        </section>
+    
     <section id="services">
         <div class="container text-center">
-            <h2>OUR DESIGN SERVICES</h2>
+            <h2>DESIGN SERVICES</h2>
             <div class="service-list">
                 <div class="service-item">
                     <h3>FLYER & POST DESIGN</h3>
@@ -322,48 +290,16 @@
         </div>
     </section>
 
+
     <section id="portfolio">
         <div class="container text-center">
-            <h2>FEATURED PC & LAPTOP SHOP DESIGNS</h2>
+            <h2>LAPTOP / PC SHOP SAMPLES</h2>
             <p>High-impact creatives designed to drive sales and engagement for the tech retail sector.</p>
             
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="PLACEHOLDER_PC_SHOP_DESIGN_1.jpg" alt="PC Shop Design 1">
-                    <div class="overlay">
-                        <h4>Gaming PC Promo Flyer</h4>
-                    </div>
+            <div class="gallery-grid" id="pc-gallery">
                 </div>
-                
-                <div class="gallery-item">
-                    <img src="PLACEHOLDER_PC_SHOP_DESIGN_2.jpg" alt="PC Shop Design 2">
-                    <div class="overlay">
-                        <h4>Laptop Service Post</h4>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="PLACEHOLDER_PC_SHOP_DESIGN_3.jpg" alt="PC Shop Design 3">
-                    <div class="overlay">
-                        <h4>Component Sale Banner</h4>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="PLACEHOLDER_PC_SHOP_DESIGN_4.jpg" alt="PC Shop Design 4">
-                    <div class="overlay">
-                        <h4>Custom Build Ad</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="other-designs">
-        <div class="container text-center">
-            <h2>OTHER DESIGN WORK</h2>
-            <p>View our diverse portfolio showcasing other industries and styles.</p>
-            <a href="YOUR_FULL_PORTFOLIO_LINK" class="btn btn-primary" target="_blank">VIEW ALL DESIGNS</a>
+            
+            <p id="pc-loading-text" style="margin-top: 20px;">Loading designs...</p>
         </div>
     </section>
 
@@ -385,6 +321,97 @@
             <p style="margin-top: 30px; font-size: 0.8em;">&copy; 2025 OWL CREATIVES. All rights reserved.</p>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. SLIDER SETUP (Top of Page) ---
+
+            const sliderContainer = document.getElementById('hero-slider');
+            // Slider image file names in the requested order
+            const sliderImages = [
+                'Artboard 1.png',
+                'Artboard 1 copy 3.jpg',
+                'Artboard 1 copy 4.jpg',
+                'Artboard 1 copy 5.jpg',
+                'Artboard 1 copy.jpg',
+                'Artboard 1 copy 2.jpg'
+            ];
+            
+            // Dynamically add slides to the HTML
+            sliderImages.forEach((fileName, index) => {
+                const img = document.createElement('img');
+                img.src = fileName; 
+                img.alt = `Design Slide ${index + 1}`;
+                img.classList.add('slide-image');
+                if (index === 0) {
+                    img.classList.add('active');
+                }
+                sliderContainer.appendChild(img);
+            });
+
+            // Slider logic for fading effect
+            const slides = document.querySelectorAll('.slide-image');
+            let currentSlide = 0;
+            
+            function showNextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+
+            // Start the slideshow (changes every 4 seconds)
+            setInterval(showNextSlide, 4000); 
+
+            // --- 2. PC/LAPTOP PORTFOLIO SETUP (Middle of Page) ---
+
+            const galleryContainer = document.getElementById('pc-gallery');
+            const loadingText = document.getElementById('pc-loading-text');
+            const folderPath = 'PC/'; 
+            
+            // FINAL UPDATED LIST for PC/Laptop samples, including the two newest files
+            const pcImageFiles = [
+                '34.jpg',
+                '45.jpg',
+                'hp victus f 15 band new.jpg',
+                'msi thin 12 15 B13VE.jpg',
+                'sus tug A 15.jpg',
+                'sus tug f 15.jpg',
+                '1.jpg',
+                '2.jpg',
+                '3.jpg',
+                'ad 2.jpg',            // NEW FILE
+                'Untitled-1.jpg'       // NEW FILE
+            ];
+
+            if (pcImageFiles.length === 0) {
+                galleryContainer.innerHTML = '<p>No designs uploaded yet.</p>';
+                loadingText.style.display = 'none';
+                return;
+            }
+
+            let htmlContent = '';
+            pcImageFiles.forEach(fileName => {
+                // Creates a clean, capitalized title from the file name for the overlay
+                let title = fileName.replace(/\.(jpg|jpeg|png|gif)$/i, '')
+                                    .replace(/[-_]/g, ' ');
+                title = title.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+
+                htmlContent += `
+                    <div class="gallery-item">
+                        <img src="${folderPath}${fileName}" alt="${title}">
+                        <div class="overlay">
+                            <h4>${title}</h4>
+                        </div>
+                    </div>
+                `;
+            });
+
+            galleryContainer.innerHTML = htmlContent;
+            loadingText.style.display = 'none';
+        });
+    </script>
 
 </body>
 </html>
